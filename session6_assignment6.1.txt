@@ -1,0 +1,94 @@
+Write a simple Timer that can periodically print a timeout message.
+
+
+package session6;
+
+public class Timer
+{
+
+public static void main(String[] args) throws InterruptedException 
+{
+	gettimer gt=new gettimer();    
+	gt.start();
+	gt.setName("Time");
+	
+	display d=new display();
+	d.start();
+	
+}
+}
+
+class gettimer extends Thread
+{
+	Thread t;
+
+	gettimer()
+	{
+		System.out.println("Display timer");
+	}
+	
+	
+void timer() throws InterruptedException
+{
+	int i,j,k;
+	
+	for( i=0;i<24;i++)
+	{
+		for( j=0;j<60;j++)
+		{
+			for(k=0;k<3600;k++)
+			{
+				System.out.println(getName()+i+":"+j+":"+k);	
+				Thread.sleep(1000);
+			}
+		}
+		
+	}
+	
+	
+}
+
+	public void run() 
+	{
+	
+		try {
+			timer();	
+			
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	
+}
+
+
+class display extends Thread
+{
+	
+	display()
+	{
+		System.out.println("Second thread");
+		
+	}
+	
+	void displaytimeout() throws InterruptedException
+	{
+	for(int i=1;i<1000;i++)
+	{
+		System.out.println("Time out");
+		Thread.sleep(10000);
+	}
+	}
+	public void run()
+	{
+		try {
+			displaytimeout();
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		
+		
+	}
+}
